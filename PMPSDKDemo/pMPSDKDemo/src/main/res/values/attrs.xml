@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="pmp">
+        <attr name="pmp_adspaceid" format="string|reference"/>
+        <attr name="pmp_width" format="string|reference"/>
+        <attr name="pmp_height" format="string|reference"/>
+        <attr name="pmp_pcat" format="string|reference"/>
+    </declare-styleable>
+</resources>

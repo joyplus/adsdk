@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="unspecified"><source path="/Users/1/github/adsdk/PMPSDKDemo/pMPSDKDemo/build/intermediates/exploded-aar/PMPSDKDemo/pMPSDK/unspecified/assets"/></dataSet><dataSet config="main"><source path="/Users/1/github/adsdk/PMPSDKDemo/pMPSDKDemo/src/main/assets"/></dataSet><dataSet config="debug"><source path="/Users/1/github/adsdk/PMPSDKDemo/pMPSDKDemo/src/debug/assets"/></dataSet></merger>
