@@ -16,7 +16,7 @@ public class ResponseAdunit {
 	public String creativeType;
 	public List<String> creativeUrls;
 	public List<String> impTrackingUrls;
-	public String clkTrackingUrls;
+	public List<String> clkTrackingUrls;
 	public String adWidth;
 	public String adHeight;
 	
@@ -52,7 +52,17 @@ public class ResponseAdunit {
 				}
 			}
 			//////
-			responseAdunit.clkTrackingUrls = jsonobject.getString("clkTrackingUrls");
+			String clkTrackingUrlsjson = jsonobject.getString("clkTrackingUrls");
+			if(!TextUtils.isEmpty(clkTrackingUrlsjson)){
+				JSONArray clkTrackingUrlsjsonArray = new JSONArray(clkTrackingUrlsjson);
+				if(clkTrackingUrlsjsonArray != null){
+					for(int i=0 ; i<clkTrackingUrlsjsonArray.length(); i++){
+						responseAdunit.clkTrackingUrls.add(clkTrackingUrlsjsonArray.getString(i));
+					}
+				}
+			}
+
+			//responseAdunit.clkTrackingUrls = jsonobject.getString("clkTrackingUrls");
 			responseAdunit.adWidth 		   = jsonobject.getString("adWidth");
 			responseAdunit.adHeight        = jsonobject.getString("adHeight");
 			return responseAdunit;
@@ -130,11 +140,11 @@ public class ResponseAdunit {
 		this.impTrackingUrls = impTrackingUrls;
 	}
 
-	public String getClkTrackingUrls() {
+	public List<String> getClkTrackingUrls() {
 		return clkTrackingUrls;
 	}
 
-	public void setClkTrackingUrls(String clkTrackingUrls) {
+	public void setClkTrackingUrls(List<String> clkTrackingUrls) {
 		this.clkTrackingUrls = clkTrackingUrls;
 	}
 

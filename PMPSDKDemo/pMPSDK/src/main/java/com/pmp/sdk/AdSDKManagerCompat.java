@@ -10,14 +10,12 @@ public class AdSDKManagerCompat {
 	
 	public static void reportClick(final Response response){
 		if(response != null && response.adunit != null){
-			AdSDKManager.reportClkTracking(new ArrayList<String>(){{
-				add(response.adunit.clkTrackingUrls);
-			}});
+			AdSDKManager.reportClkTracking(response.adunit.clkTrackingUrls);
 		}
 	}
 	public static void reportImp(Response response){
 		if(response != null && response.adunit != null){
-			AdSDKManager.reportClkTracking(response.adunit.impTrackingUrls);
+			AdSDKManager.reportImpTracking(response.adunit.impTrackingUrls);
 		}
 	}
 	

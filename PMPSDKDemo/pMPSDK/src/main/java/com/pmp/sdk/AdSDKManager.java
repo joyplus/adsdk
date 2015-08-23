@@ -59,6 +59,7 @@ public class AdSDKManager {
 			if(uri != null && uri.size()>0){
 				List<Report> lists = new ArrayList<Report>();
 				for(String u : uri){
+					android.util.Log.d("PMP","url"+u);
 					lists.add(new Report(type, u));
 				}
 				mReportController.addReport(lists);

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
-public class CustonAdView extends RelativeLayout{
+public class CustonAdView extends RelativeLayout {
 
 	public CustonAdView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);

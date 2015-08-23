@@ -16,7 +16,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -57,7 +60,17 @@ public class FloatView extends RelativeLayout {
 //					super.draw(canvas);
 //			}
 //		};
-		WebView webView = new WebView(context);
+		WebView webView = new WebView(context){
+			@Override
+			public boolean onTouchEvent(MotionEvent event) {
+				// TODO Auto-generated method stub
+				if(mResponse != null && mResponse.adunit != null 
+						&& (TextUtils.isEmpty(mResponse.adunit.clickUrl) || mResponse.isloadUriNoImage())){
+						return super.onTouchEvent(event);
+				}
+				return false;
+			}
+		};
 		webView.setBackgroundColor(Color.TRANSPARENT);
 		mWebSettings = webView.getSettings();
 		mWebSettings.setJavaScriptEnabled(true);
@@ -82,6 +95,7 @@ public class FloatView extends RelativeLayout {
 
 	private void doOpenUrl(final String url) {
 		notifyAdClicked();
+		if(TextUtils.isEmpty(url))return;
 		if ((url.startsWith("http://") || url.startsWith("https://"))) {
 			if(url.endsWith(".mp4")){
 				Intent i = new Intent(Intent.ACTION_VIEW);
@@ -160,7 +174,6 @@ public class FloatView extends RelativeLayout {
 	}
 	private void showContent() {
 		  try {
-			
 			 if(mResponse.isloadUriNoImage()){
 				 mfirstWebView.clearCache(false);
 				 mfirstWebView.loadUrl(mResponse.adunit.creativeUrls.get(0));
@@ -173,14 +186,31 @@ public class FloatView extends RelativeLayout {
             	String text = MessageFormat.format(IMAGE_BODY, mResponse.adunit.creativeUrls.get(0) ,null,null);
         		text = Uri.encode(HIDE_BORDER + text);
         		mfirstWebView.loadData(text, "text/html","UTF-8");
-			    notifyLoadAdSucceeded();
+			    if(!TextUtils.isEmpty(mResponse.adunit.clickUrl)){
+			    	mfirstWebView.setClickable(true);
+			    	mfirstWebView.setOnClickListener(new OnClickListener(){
+						@Override
+						public void onClick(View arg0) {
+							// TODO Auto-generated method stub
+							doOpenUrl(mResponse.adunit.clickUrl);
+							notifyAdClicked();
+						}
+			    	});
+			    }
 			    //String baseUrl = mResponse.adunit.creativeUrls.get(0);    
 			    //mfirstWebView.loadUrl(baseUrl);
 			} 
+			notifyLoadAdSucceeded();
             if(mAnimation){
             	mfirstWebView.startAnimation(AnimationUtils.GetTranslateAnimation(mTranslateAnimationType));
             }
 		} catch (Throwable t) {}
+	}
+	public boolean onUserClick(){
+		if(mResponse!=null && mResponse.adunit!=null && !TextUtils.isEmpty(mResponse.adunit.clickUrl)){
+	    	doOpenUrl(mResponse.adunit.clickUrl);
+	    } 
+		return false;
 	}
 	public void SetAnimation(AnimationUtils.TranslateAnimationType type){
 		mTranslateAnimationType = type;

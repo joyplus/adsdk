@@ -219,7 +219,10 @@ public class ReportController{
 			 try{//we don't want to know response
 				 android.util.Log.d("PMP","report-->"+string);
 				 HttpManager.getHttpResponse(string);
-			 }catch(Throwable e){}
+			 }catch(Throwable e){
+				 android.util.Log.d("PMP","failed to send tracking");
+				 android.util.Log.d("PMP", e.toString());
+			 }
 			 return true;
 		 }
 		 public synchronized boolean isNeedReCreate(){

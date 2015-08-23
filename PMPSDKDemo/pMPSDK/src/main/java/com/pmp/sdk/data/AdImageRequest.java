@@ -33,7 +33,9 @@ public class AdImageRequest extends RequestAd<Response>{
 		// TODO Auto-generated method stub
 		Gson gson = new Gson();
 		try{ 
-			return gson.fromJson(getString(inputStream), Response.class);
+			Response response = gson.fromJson(getString(inputStream), Response.class);
+			android.util.Log.d("PMP","response-->"+ (response ==null ? "null" : response.toString()));
+			return response;
 		}catch(Throwable e){android.util.Log.d("PMP","response fail -->"+e.toString());}
 		return null;
 		//return Response.parserResponse(getString(inputStream));
