@@ -24,3 +24,15 @@ PMPSDKDemo/pMPSDKDemo/*.gradle
 PMPSDKDemo/pMPSDK/build/intermediates/manifests/tmp/manifestMerger5135442101027092882.xml
 
 PMPSDKDemo/pMPSDK/build/intermediates/manifests/tmp/manifestMerger6669748284740294122.xml
+
+*.aar
+
+*.aar
+
+*.dex
+
+*.ap_
+
+*.apk
+
+*.apk
