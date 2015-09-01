@@ -26,9 +26,11 @@ import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 
 public class FloatView extends RelativeLayout {
-	public static final String IMAGE_BODY = "<body style='\"'margin: 0px; padding: 0px; text-align:center;'\"'><img src='\"'{0}'\"' width='\"'{1}'dp\"' height='\"'{2}'dp\"'/></body>";
+	public static final String IMAGE_BODY = "<body style='\"'margin: 0px; padding: 0px; text-align:center;'\"'><img src='\"'{0}'\"' width='\"'{1}'dp\"' height='\"'{2}'dp\"'/>{3}</body>";
 	//	public static final String IMAGE_BODY = "<body style='\"'margin: 0px; padding: 0px; text-align:center;'\"'><div style=\"background-image:{0} width='\"'{1}'dp\"' height='\"'{2}'dp\"'></div></body>";
 	public static final String REDIRECT_URI = "REDIRECT_URI";
+
+	public static final String IMP_TRACKING_TEMPLATE = "<img src='\"'{0}'\"' />";
 
 	public static final String HIDE_BORDER = "<style>* { -webkit-tap-highlight-color: rgba(0,0,0,0);} img {width:100%;height:100%}</style>";
 	//	public static final String HIDE_BORDER = "<style>* { -webkit-tap-highlight-color: rgba(0,0,0,0) }</style>";
@@ -170,7 +172,7 @@ public class FloatView extends RelativeLayout {
 	}
 	private void notifyLoadAdSucceeded() {
 		android.util.Log.d("PMP","notifyLoadAdSucceeded");
-		AdSDKManagerCompat.reportImp(mResponse);
+		//AdSDKManagerCompat.reportImp(mResponse);
 	}
 	private void showContent() {
 		  try {
@@ -183,7 +185,16 @@ public class FloatView extends RelativeLayout {
 //					text = Uri.encode(Const.HIDE_BORDER + text);
 //					mfirstWebView.loadData(text, "text/html", Const.ENCODING);
             	android.util.Log.d("PMP","load image -->" + mResponse.adunit.creativeUrls.get(0));
-            	String text = MessageFormat.format(IMAGE_BODY, mResponse.adunit.creativeUrls.get(0) ,null,null);
+				String strImpUrls ="";
+				 for(String impUrl:mResponse.adunit.getImpTrackingUrls()){
+					 String strImpUrl = MessageFormat.format(IMP_TRACKING_TEMPLATE, impUrl);
+					 strImpUrls +=strImpUrl;
+				 }
+
+            	String text = MessageFormat.format(IMAGE_BODY, mResponse.adunit.creativeUrls.get(0) ,"","",strImpUrls);
+
+				 android.util.Log.d("PMP","load html -->" + text);
+
         		text = Uri.encode(HIDE_BORDER + text);
         		mfirstWebView.loadData(text, "text/html","UTF-8");
 			    if(!TextUtils.isEmpty(mResponse.adunit.clickUrl)){
