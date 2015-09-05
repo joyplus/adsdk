@@ -1,0 +1,2 @@
+include ':pMPSDK'
+include ':pMPSDKDemo'

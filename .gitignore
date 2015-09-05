@@ -8,24 +8,15 @@
 *.war
 *.ear
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
 
-.gradle
 .idea
-build.gradle
+
 /build/*
 PMPSDKDemo/build/*
-PMPSDKDemo/*.gradle
-PMPSDKDemo/pMPSDK/build/*
-PMPSDKDemo/pMPSDK/*.gradle
-PMPSDKDemo/pMPSDKDemo/build/*
-PMPSDKDemo/pMPSDKDemo/*.gradle
-PMPSDKDemo/pMPSDK/build/intermediates/manifests/tmp/manifestMerger5135442101027092882.xml
+PMPSDKDemo/pMPSDK/build/
+PMPSDKDemo/pMPSDKDemo/build/
 
-PMPSDKDemo/pMPSDK/build/intermediates/manifests/tmp/manifestMerger6669748284740294122.xml
-
-*.aar
+PMPSDKDemo/.gradle/
 
 *.aar
 
@@ -35,4 +26,3 @@ PMPSDKDemo/pMPSDK/build/intermediates/manifests/tmp/manifestMerger66697482847402
 
 *.apk
 
-*.apk
