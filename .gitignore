@@ -12,7 +12,7 @@
 .idea
 
 /build/*
-PMPSDKDemo/build/*
+PMPSDKDemo/build/
 PMPSDKDemo/pMPSDK/build/
 PMPSDKDemo/pMPSDKDemo/build/
 
