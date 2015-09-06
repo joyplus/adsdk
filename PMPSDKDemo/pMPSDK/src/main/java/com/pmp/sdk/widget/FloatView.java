@@ -172,7 +172,7 @@ public class FloatView extends RelativeLayout {
 	}
 	private void notifyLoadAdSucceeded() {
 		android.util.Log.d("PMP","notifyLoadAdSucceeded");
-		//AdSDKManagerCompat.reportImp(mResponse);
+		AdSDKManagerCompat.reportImp(mResponse);
 	}
 	private void showContent() {
 		  try {

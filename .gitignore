@@ -16,13 +16,17 @@ PMPSDKDemo/build/
 PMPSDKDemo/pMPSDK/build/
 PMPSDKDemo/pMPSDKDemo/build/
 
+**/release/
+**/aapt/
+**/debug/
+
 PMPSDKDemo/.gradle/
 
-*.aar
+**/*.aar
 
-*.dex
+**/*.dex
 
-*.ap_
+**/*.ap_
 
-*.apk
+**/*.apk
 

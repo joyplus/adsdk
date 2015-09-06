@@ -101,9 +101,3 @@ ADDED from AndroidManifest.xml:39:9
 		ADDED from AndroidManifest.xml:39:72
 	android:name
 		ADDED from AndroidManifest.xml:39:19
-activity#com.example.pmpsdk.MainActivity
-ADDED from PMPSDKDemo:pMPSDK:unspecified:29:9
-	android:label
-		ADDED from PMPSDKDemo:pMPSDK:unspecified:31:13
-	android:name
-		ADDED from PMPSDKDemo:pMPSDK:unspecified:30:13
