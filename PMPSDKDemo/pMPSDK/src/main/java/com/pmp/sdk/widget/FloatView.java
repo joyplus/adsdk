@@ -37,6 +37,7 @@ public class FloatView extends RelativeLayout {
 
 	private   boolean       mAnimation;
 	private   Response      mResponse;
+    private   String        mContent;
 	private   WebSettings   mWebSettings;
 	private   Context       mContext = null;
 	private   WebView       mfirstWebView;
@@ -54,7 +55,18 @@ public class FloatView extends RelativeLayout {
 		this.mAnimation = animation;
 	}
 
-	private WebView createWebView(final Context context) {
+    public FloatView(Context context, String content, final boolean animation) {
+        super(context);
+        mContent = content;
+        mContext = context;
+        this.mAnimation = animation;
+    }
+
+    public FloatView(Context context, String content) {
+        this(context, content, true);
+    }
+
+    private WebView createWebView(final Context context) {
 //		final WebView webView = new WebView(context) {
 //			@Override
 //			public void draw(final Canvas canvas) {
@@ -166,6 +178,16 @@ public class FloatView extends RelativeLayout {
         }
 	}
 
+    public void Show(final String ad) {
+        if(ad == null)return;
+        mContent  = ad;
+        if(mContent != null && !"".equals(mContent)){
+            initCompatibility();
+            buildBannerView();
+            showContent();
+        }
+    }
+
 	private void notifyAdClicked() {
 		android.util.Log.d("PMP","notifyAdClicked");
 		AdSDKManagerCompat.reportClick(mResponse);
@@ -176,7 +198,16 @@ public class FloatView extends RelativeLayout {
 	}
 	private void showContent() {
 		  try {
-			 if(mResponse.isloadUriNoImage()){
+
+              if (mContent != null) {
+                  mContent = mContent.replaceAll("localhost", "10.0.2.2");
+                  mfirstWebView.loadData(mContent, "text/html", "UTF-8");
+                  if(mAnimation){
+                      mfirstWebView.startAnimation(AnimationUtils.GetTranslateAnimation(mTranslateAnimationType));
+                  }
+                  return;
+
+              } else if(mResponse.isloadUriNoImage()){
 				 mfirstWebView.clearCache(false);
 				 mfirstWebView.loadUrl(mResponse.adunit.creativeUrls.get(0));
 			 }else{

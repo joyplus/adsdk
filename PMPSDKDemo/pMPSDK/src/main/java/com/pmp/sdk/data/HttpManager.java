@@ -17,8 +17,9 @@ public class HttpManager {
 	public static final String ENCODING = "UTF-8";
 	public static final String RESPONSE_ENCODING = "ISO-8859-1";
 	
-	public static final String PMP_SERVICE = "http://pmp.ihoyes.com/api/clientreq";
-	
+//	public static final String PMP_SERVICE = "http://pmp.ihoyes.com/api/clientreq";
+	public static final String PMP_SERVICE = "http://10.0.2.2:7070/api/webad";
+
 	public static HttpResponse getHttpResponse(String uri) throws Throwable{
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpConnectionParams.setSoTimeout(client.getParams(),

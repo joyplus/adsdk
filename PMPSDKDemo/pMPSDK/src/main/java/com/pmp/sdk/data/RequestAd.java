@@ -1,6 +1,7 @@
 package com.pmp.sdk.data;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,6 +22,36 @@ public abstract class RequestAd<T> {
 			throws RequestException {
 		if (is == null) { 
 			try {
+				return parse(sendRequestStream(request));
+			} catch (RequestException e) {
+				throw e;
+			} catch (Throwable t) {
+				throw new RequestException("Error in HTTP request Throwable " + t.toString(), t);
+			}
+		} else {
+			return parseTestString();
+		}
+	}
+
+	public String sendRequestSimple(AdRequest request)
+			throws RequestException {
+		if (is == null) {
+			try {
+				InputStream is = sendRequestStream(request);
+				if (is != null) {
+					return getString(is);
+				}
+			} catch (Throwable t) {
+				throw new RequestException("Error in HTTP request Throwable " + t.toString(), t);
+			}
+		}
+		return "";
+	}
+
+	private InputStream sendRequestStream(AdRequest request)
+			throws RequestException {
+		if (is == null) {
+			try {
 				DefaultHttpClient client = new DefaultHttpClient();
 				HttpConnectionParams.setSoTimeout(client.getParams(),
 						HttpManager.SOCKET_TIMEOUT);
@@ -34,13 +65,10 @@ public abstract class RequestAd<T> {
 				response = client.execute(get);
 				int responseCode = response.getStatusLine().getStatusCode();
 				if (responseCode == HttpURLConnection.HTTP_OK) {
-					return parse(response.getEntity().getContent());
+					return response.getEntity().getContent();
 				} else {
-					throw new RequestException("Server Error. Response code:"
-							+ responseCode);
+					return null;
 				}
-			} catch (RequestException e) {
-				throw e;
 			} catch (ClientProtocolException e) {
 				throw new RequestException("Error in HTTP request ClientProtocolException " + e.toString(), e);
 			} catch (IOException e) {
@@ -49,7 +77,7 @@ public abstract class RequestAd<T> {
 				throw new RequestException("Error in HTTP request Throwable " + t.toString(), t);
 			}
 		} else {
-			return parseTestString();
+			return null;
 		}
 	}
 
