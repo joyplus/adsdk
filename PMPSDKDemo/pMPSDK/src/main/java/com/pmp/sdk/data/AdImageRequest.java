@@ -23,6 +23,11 @@ public class AdImageRequest extends RequestAd<Response>{
 		if(mAdRequest == null) return null;
 		return super.sendRequest(mAdRequest);
 	}
+	public String sendRequestSimple() throws RequestException {
+		// TODO Auto-generated method stub
+		if(mAdRequest == null) return null;
+		return super.sendRequestSimple(mAdRequest);
+	}
 	@Override
 	Response parseTestString() throws RequestException {
 		// TODO Auto-generated method stub

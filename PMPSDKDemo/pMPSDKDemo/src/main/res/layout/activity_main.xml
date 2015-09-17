@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
-	<com.example.pmpsdkdemo.AdView android:layout_width="fill_parent"
+	<com.example.pmpsdkdemo.AdView2 android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    app:pmp_adspaceid="TE57BSC5FA3FFACC"
 	    app:pmp_width="480"
